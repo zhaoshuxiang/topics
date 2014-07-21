@@ -1,60 +1,67 @@
-/* 用事件处理串行的异步 */
+// 抽象设计
+// PubSub 抽象设计允许应用程序把来源层的事件发布至其他层
+// PubSub 更适合做一对多的事情
 var events = require('events');
-var util = require('util');
+var obj = new (events.EventEmitter)();
 
-var help = new (events.EventEmitter)();
+obj.on('task1', function() {
+    task2(function() {
+        obj.emit('task2');
+    });
+});
 
-help.on('a', callbackA);
-help.on('b', callbackB);
-help.on('c', callbackC);
-help.on('d', callbackD);
+obj.on('task2', function() {
+    task3(function() {
+        obj.emit('task3');
+    });
+})
 
-help.emit('a');
+obj.on('task3', function() {
+    task4(function() {
+        obj.emit('task4');
+    });
+})
 
-function actionA() {
+obj.on('task4', function() {
+    console.log('all is ok !')
+})
+
+task1(function() {
+    obj.emit('task1');
+});
+
+
+/*  缺点什么？ */
+
+
+function task1(callback) {
     setTimeout(function() {
-        help.emit('a');
+        // body...
+        console.log('task1 is OK!');
+        callback.call(this);
     }, 1000);
 }
 
-function callbackA () {
-    log('a ');
-    actionB();
-}
-
-function actionB() {
+function task2(callback) {
     setTimeout(function() {
-        help.emit('b');
+        // body...
+        console.log('task2 is OK!');
+        callback.call(this);
     }, 1000);
 }
 
-function callbackB () {
-    log('b ');
-    actionC();
-}
-
-function actionC() {
+function task3(callback) {
     setTimeout(function() {
-        help.emit('c');
+        // body...
+        console.log('task3 is OK!');
+        callback.call(this);
     }, 1000);
 }
 
-function callbackC () {
-    log('c ');
-    actionD();
-}
-
-function actionD() {
+function task4(callback) {
     setTimeout(function() {
-        help.emit('d');
+        // body...
+        console.log('task4 is OK!');
+        callback.call(this);
     }, 1000);
-}
-
-function callbackD () {
-    log('d ');
-}
-
-
-function log(str) {
-    process.stdout.write(str);
 }
