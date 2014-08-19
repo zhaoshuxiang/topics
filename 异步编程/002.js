@@ -1,6 +1,6 @@
 // 抽象设计
 // PubSub 抽象设计允许应用程序把来源层的事件发布至其他层
-// PubSub 更适合做一对多的事情
+// PubSub 更适合做一对多的事情, 多种状态
 var events = require('events');
 var obj = new (events.EventEmitter)();
 
