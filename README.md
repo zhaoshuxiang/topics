@@ -1,1 +1,11 @@
-#欢迎使用 Cmd - 在线 Markdown 编辑阅读器
+#技术主题
+
+```python
+@requires_authorization
+class SomeClass:
+    pass
+
+if __name__ == '__main__':
+    # A comment
+    print 'hello world'
+```
