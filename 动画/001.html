@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>testCanvas</title>
+</head>
+<body>
+    <canvas id="testCanvas">
+        <p>Not supoort Canvas!</p>
+    </canvas>
+
+    <script type="text/javascript">
+        var canvasEle = document.getElementById('testCanvas');
+
+        var ctx = canvasEle.getContext('2d');
+        var canvas3DContext = canvasEle.getContext('webkit-3d');
+
+
+        // 填充背景
+        ctx.fillStyle = '#ffffaa';
+        ctx.fillRect(0, 0, 300, 150);
+
+        // 文字
+        // ctx.fillStyle = '#000000';
+        // ctx.font = '40px serif';
+        // ctx.fillText('hello world', 20, 40);
+
+        // ctx.beginPath();
+        // ctx.moveTo(0, 0);
+        // ctx.lineTo(100, 100);
+
+        // // ctx.linewidth = 1;
+        // ctx.closePath();
+
+        // ctx.stroke();
+
+
+        ctx.beginPath();
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 9;
+        ctx.moveTo(100, 100);
+        ctx.lineTo(100, 150);
+        ctx.stroke();
+        ctx.closePath();
+
+        // 清空画布
+        // ctx.clearRect(0, 0, 300, 150);
+
+    </script>
+</body>
+</html>
